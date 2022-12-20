@@ -7,12 +7,10 @@ ValueNotifier<List<StudentModel>> studentListNotifier = ValueNotifier([]);
 
 ValueNotifier<List<TrsutiesModel>> trustiesListNotifier = ValueNotifier([]);
 
-int? dataId;
-
 Future<void> addStudent(StudentModel value) async {
   final studentDB = await Hive.openBox<StudentModel>('student_db');
 
-  dataId = await studentDB.add(value);
+  final dataId = await studentDB.add(value);
   value.id = dataId;
 
   studentDB.put(dataId, value);
@@ -35,14 +33,12 @@ Future<void> getStudent(int id) async {
   final studentDB = await Hive.openBox<StudentModel>('student_db');
 
   studentDB.get(id);
-  studentListNotifier.notifyListeners();
 }
 
 Future<void> deleteStudent(int id) async {
   final studentDB = await Hive.openBox<StudentModel>('student_db');
 
   await studentDB.delete(id);
-
   getAllStudents();
 }
 

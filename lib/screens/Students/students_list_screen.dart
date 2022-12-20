@@ -12,6 +12,8 @@ import 'package:pankaj_charitable_trust/Widgets/Text%20Form%20Fields/password_wi
 
 import 'add_student_screen.dart';
 
+int? dataIndex;
+
 class StudentListScreen extends StatelessWidget {
   const StudentListScreen({super.key});
 
@@ -88,15 +90,14 @@ class StudentListScreen extends StatelessWidget {
 
                             return ListTile(
                               onTap: () {
+                                dataIndex = index;
                                 if (data.id != null) {
-                                  getStudent(data.id!);
+                                  getStudent(dataIndex!);
 
                                   Navigator.of(context).push(
                                     MaterialPageRoute(
                                       builder: (context) {
-                                        return StudentDetailsScreen(
-                                          id: data.id!,
-                                        );
+                                        return StudentDetailsScreen();
                                       },
                                     ),
                                   );

@@ -7,10 +7,12 @@ import 'package:pankaj_charitable_trust/constants/dimensions.dart';
 import 'package:pankaj_charitable_trust/Widgets/AppBar/app_bar_widget.dart';
 import 'package:pankaj_charitable_trust/Widgets/Containers/container.dart';
 import 'package:pankaj_charitable_trust/database/functions/db_helper.dart';
+import 'package:pankaj_charitable_trust/screens/Students/students_list_screen.dart';
 
 class StudentDetailsScreen extends StatefulWidget {
-  int id;
-  StudentDetailsScreen({super.key, required this.id});
+  StudentDetailsScreen({
+    super.key,
+  });
 
   @override
   State<StudentDetailsScreen> createState() => _StudentDetailsScreenState();
@@ -19,7 +21,7 @@ class StudentDetailsScreen extends StatefulWidget {
 class _StudentDetailsScreenState extends State<StudentDetailsScreen> {
   @override
   Widget build(BuildContext context) {
-    getStudent(widget.id);
+    getStudent(dataIndex!);
 
     return Scaffold(
       appBar: PreferredSize(
@@ -29,9 +31,9 @@ class _StudentDetailsScreenState extends State<StudentDetailsScreen> {
         valueListenable: studentListNotifier,
         builder: (context, value, child) {
           final data = value;
-          final studentData = value[widget.id];
+          final studentData = value[dataIndex!];
 
-          return widget.id != null
+          return studentData.email.isNotEmpty
               ? Container(
                   child: Column(
                     children: [
@@ -114,6 +116,8 @@ class _StudentDetailsScreenState extends State<StudentDetailsScreen> {
                                             onPressed: () {
                                               setState(() {
                                                 deleteStudent(studentData.id!);
+
+                                                //Navigator.of(context).pop();
                                               });
                                             },
                                             child: const Text('Delete')),
@@ -134,7 +138,7 @@ class _StudentDetailsScreenState extends State<StudentDetailsScreen> {
                     ],
                   ),
                 )
-              : Text('Student Not Details not Available');
+              : Text('Data Deleted');
         },
       ),
     );
