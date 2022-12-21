@@ -22,6 +22,7 @@ class _StudentDetailsScreenState extends State<StudentDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     getStudent(dataIndex!);
+    bool studentDeleted = false;
 
     return Scaffold(
       appBar: PreferredSize(
@@ -33,7 +34,7 @@ class _StudentDetailsScreenState extends State<StudentDetailsScreen> {
           final data = value;
           final studentData = value[dataIndex!];
 
-          return studentData.email.isNotEmpty
+          return studentDeleted == false
               ? Container(
                   child: Column(
                     children: [
@@ -116,8 +117,7 @@ class _StudentDetailsScreenState extends State<StudentDetailsScreen> {
                                             onPressed: () {
                                               setState(() {
                                                 deleteStudent(studentData.id!);
-
-                                                //Navigator.of(context).pop();
+                                                studentDeleted = true;
                                               });
                                             },
                                             child: const Text('Delete')),
