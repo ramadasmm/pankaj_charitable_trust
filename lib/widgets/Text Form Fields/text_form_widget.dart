@@ -4,6 +4,7 @@ class TextFormWidget extends StatelessWidget {
   String hintText;
   TextEditingController controller;
   String? Function(String?)? validator;
+
   TextFormWidget(
       {super.key,
       required this.hintText,

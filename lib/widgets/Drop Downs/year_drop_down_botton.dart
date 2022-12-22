@@ -5,7 +5,8 @@ const List<String> list = <String>['1', '2', '3', '4'];
 late String year;
 
 class YearDropDownButton extends StatefulWidget {
-  const YearDropDownButton({super.key});
+  String? dropdownValue;
+  YearDropDownButton({super.key, this.dropdownValue});
 
   @override
   State<YearDropDownButton> createState() => _yearDropDownButtonState();
@@ -59,7 +60,7 @@ class _yearDropDownButtonState extends State<YearDropDownButton> {
 
       hint: Text(hintText),
       isExpanded: true,
-      value: dropdownValue,
+      value: widget.dropdownValue,
       icon: const Icon(
         Icons.arrow_drop_down,
         size: 30,

@@ -152,7 +152,7 @@ class AddStudentScreen extends StatelessWidget {
                         ),
                       ),
                       kHeight10,
-                      const Padding(
+                      Padding(
                           padding: EdgeInsets.only(left: 0),
                           child: SchoolDropDownButton()),
                       kHeight20,
@@ -164,7 +164,7 @@ class AddStudentScreen extends StatelessWidget {
                         ),
                       ),
                       kHeight10,
-                      const Padding(
+                      Padding(
                           padding: EdgeInsets.only(left: 0),
                           child: CollegeDropDownButton()),
                       kHeight20,
@@ -176,7 +176,7 @@ class AddStudentScreen extends StatelessWidget {
                         ),
                       ),
                       kHeight10,
-                      const Padding(
+                      Padding(
                           padding: EdgeInsets.only(left: 0),
                           child: CourseDropDownButton()),
                       kHeight20,
@@ -188,7 +188,7 @@ class AddStudentScreen extends StatelessWidget {
                         ),
                       ),
                       kHeight10,
-                      const Padding(
+                      Padding(
                           padding: EdgeInsets.only(left: 0),
                           child: YearDropDownButton()),
                       kHeight30,

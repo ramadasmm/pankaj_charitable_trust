@@ -83,42 +83,46 @@ class StudentListScreen extends StatelessWidget {
                       ),
                     ),
                     Flexible(
-                      child: ListView.separated(
-                          physics: BouncingScrollPhysics(),
-                          itemBuilder: (context, index) {
-                            final data = value[index];
+                        child: data.isNotEmpty
+                            ? ListView.separated(
+                                physics: BouncingScrollPhysics(),
+                                itemBuilder: (context, index) {
+                                  final data = value[index];
 
-                            return ListTile(
-                              onTap: () {
-                                dataIndex = index;
-                                if (data.id != null) {
-                                  getStudent(dataIndex!);
+                                  return ListTile(
+                                    onTap: () {
+                                      dataIndex = index;
 
-                                  Navigator.of(context).push(
-                                    MaterialPageRoute(
-                                      builder: (context) {
-                                        return StudentDetailsScreen();
-                                      },
+                                      if (data.id != null) {
+                                        getStudent(dataIndex!);
+
+                                        Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                            builder: (context) {
+                                              return StudentDetailsScreen();
+                                            },
+                                          ),
+                                        );
+                                      }
+                                    },
+                                    title: Text(data.name),
+                                    subtitle: Text(data.email),
+                                    trailing: Text(
+                                      'Year: ${data.year}',
+                                      style: TextStyle(color: Colors.black38),
                                     ),
                                   );
-                                }
-                              },
-                              title: Text(data.name),
-                              subtitle: Text(data.email),
-                              trailing: Text(
-                                'Year: ${data.year}',
-                                style: TextStyle(color: Colors.black38),
-                              ),
-                            );
-                          },
-                          separatorBuilder: (context, index) {
-                            return Divider(
-                              height: 5,
-                              thickness: 1,
-                            );
-                          },
-                          itemCount: value.length),
-                    )
+                                },
+                                separatorBuilder: (context, index) {
+                                  return const Divider(
+                                    height: 5,
+                                    thickness: 1,
+                                  );
+                                },
+                                itemCount: value.length)
+                            : const Center(
+                                child: Text('No Students'),
+                              ))
                   ],
                 ),
               );
