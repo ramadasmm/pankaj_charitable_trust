@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.pankaj_charitable_trust">
+    
    <application
         android:label="pankaj_charitable_trust"
         android:name="${applicationName}"

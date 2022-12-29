@@ -1,44 +1,44 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'trusties_model.dart';
+part of 'gallery_model.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class TrsutiesModelAdapter extends TypeAdapter<TrsutiesModel> {
+class GalleryModelAdapter extends TypeAdapter<GalleryModel> {
   @override
-  final int typeId = 2;
+  final int typeId = 3;
 
   @override
-  TrsutiesModel read(BinaryReader reader) {
+  GalleryModel read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return TrsutiesModel(
+    return GalleryModel(
       id: fields[0] as int?,
-      name: fields[1] as String,
-      email: fields[2] as String,
-      number: fields[3] as String,
-      address: fields[4] as String,
+      images: (fields[1] as List).cast<Uint8List>(),
+      eventName: fields[2] as String,
+      description: fields[3] as String,
+      dateTime: fields[4] as String,
     );
   }
 
   @override
-  void write(BinaryWriter writer, TrsutiesModel obj) {
+  void write(BinaryWriter writer, GalleryModel obj) {
     writer
       ..writeByte(5)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
-      ..write(obj.name)
+      ..write(obj.images)
       ..writeByte(2)
-      ..write(obj.email)
+      ..write(obj.eventName)
       ..writeByte(3)
-      ..write(obj.number)
+      ..write(obj.description)
       ..writeByte(4)
-      ..write(obj.address);
+      ..write(obj.dateTime);
   }
 
   @override
@@ -47,7 +47,7 @@ class TrsutiesModelAdapter extends TypeAdapter<TrsutiesModel> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is TrsutiesModelAdapter &&
+      other is GalleryModelAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

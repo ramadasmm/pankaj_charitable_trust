@@ -76,9 +76,9 @@ class _CollegeDropDownButtonState extends State<CollegeDropDownButton> {
       // ),
       onChanged: (String? value) {
         setState(() {
-          dropdownValue = value!;
+          widget.dropdownValue = value!;
         });
-        collegName = dropdownValue!;
+        collegName = widget.dropdownValue!;
       },
       items: list.map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(

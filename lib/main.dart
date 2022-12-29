@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:pankaj_charitable_trust/database/models/gallery_model.dart';
 import 'package:pankaj_charitable_trust/database/models/student_model.dart';
 import 'package:pankaj_charitable_trust/database/models/trusties_model.dart';
-import 'package:pankaj_charitable_trust/screens/Dashboard/main_screen.dart';
-
-import 'screens/Students/student_details_screen.dart';
+import 'package:pankaj_charitable_trust/screens/main_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   if (!Hive.isAdapterRegistered(StudentModelAdapter().typeId) &&
-      !Hive.isAdapterRegistered(TrsutiesModelAdapter().typeId)) {
+      !Hive.isAdapterRegistered(TrsutiesModelAdapter().typeId) &&
+      !Hive.isAdapterRegistered(GalleryModelAdapter().typeId)) {
     Hive.registerAdapter(StudentModelAdapter());
     Hive.registerAdapter(TrsutiesModelAdapter());
+    Hive.registerAdapter(GalleryModelAdapter());
   }
 
   runApp(const MyApp());

@@ -8,9 +8,11 @@ import 'package:pankaj_charitable_trust/Widgets/Text%20Form%20Fields/address_tex
 import 'package:pankaj_charitable_trust/Widgets/Text%20Form%20Fields/number_text_widget.dart';
 import 'package:pankaj_charitable_trust/Widgets/Text%20Form%20Fields/text_form_widget.dart';
 import 'package:pankaj_charitable_trust/Widgets/Buttons/app_button.dart';
+import 'package:pankaj_charitable_trust/screens/Students/students_list_screen.dart';
 
 import 'package:pankaj_charitable_trust/widgets/Drop%20Downs/college_drop_down.dart';
 import 'package:pankaj_charitable_trust/widgets/Drop%20Downs/course_drop_down_button.dart';
+
 import 'package:pankaj_charitable_trust/widgets/Drop%20Downs/year_drop_down_botton.dart';
 
 class AddStudentScreen extends StatelessWidget {
@@ -139,7 +141,7 @@ class AddStudentScreen extends StatelessWidget {
                             return 'Please Enter Address';
                           } else if (!RegExp(r'(^[#.0-9a-zA-Z\s,-]+$)')
                               .hasMatch(value)) {
-                            return 'Enter correct number';
+                            return 'Enter correct address';
                           }
                         },
                       ),

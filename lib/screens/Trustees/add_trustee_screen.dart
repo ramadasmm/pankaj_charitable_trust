@@ -6,6 +6,7 @@ import 'package:pankaj_charitable_trust/Widgets/Text%20Form%20Fields/text_form_w
 import 'package:pankaj_charitable_trust/Widgets/Buttons/app_button.dart';
 import 'package:pankaj_charitable_trust/database/functions/db_helper.dart';
 import 'package:pankaj_charitable_trust/database/models/trusties_model.dart';
+import 'package:pankaj_charitable_trust/screens/Trustees/trustee_details_screen.dart';
 import 'package:pankaj_charitable_trust/screens/Trustees/trustees_list_screen.dart';
 
 import '../../Widgets/AppBar/app_bar.dart';
@@ -138,17 +139,27 @@ class AddTrusteeScreen extends StatelessWidget {
                                 final number = numberController.text;
                                 final address = addressController.text;
 
+                                final _tustie = TrsutiesModel(
+                                    name: name,
+                                    email: email,
+                                    number: number,
+                                    address: address);
+
                                 if (formKey.currentState!.validate()) {
                                   formKey.currentState!.save();
 
-                                  final _tustie = TrsutiesModel(
-                                      name: name,
-                                      email: email,
-                                      number: number,
-                                      address: address);
-
                                   addTrusties(_tustie);
                                   Navigator.pop(context);
+                                } else {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      margin: EdgeInsets.all(10),
+                                      backgroundColor: Colors.red,
+                                      duration: Duration(seconds: 1),
+                                      behavior: SnackBarBehavior.floating,
+                                      content: Text('User already exist'),
+                                    ),
+                                  );
                                 }
                               },
                               child: AppButton(text: 'Save')))

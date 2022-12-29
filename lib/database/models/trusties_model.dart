@@ -2,16 +2,19 @@ import 'package:hive_flutter/adapters.dart';
 part 'trusties_model.g.dart';
 
 @HiveType(typeId: 2)
-class TrsutiesModel {
+class TrsutiesModel extends HiveObject {
   @HiveField(0)
-  String name;
+  int? id;
   @HiveField(1)
-  String email;
+  String name;
   @HiveField(2)
-  String number;
+  String email;
   @HiveField(3)
+  String number;
+  @HiveField(4)
   String address;
   TrsutiesModel({
+    this.id,
     required this.name,
     required this.email,
     required this.number,

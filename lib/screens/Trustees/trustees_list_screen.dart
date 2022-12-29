@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 
-import 'package:pankaj_charitable_trust/constants/dimensions.dart';
 import 'package:pankaj_charitable_trust/database/functions/db_helper.dart';
 import 'package:pankaj_charitable_trust/screens/Trustees/add_trustee_screen.dart';
 import 'package:pankaj_charitable_trust/Widgets/AppBar/app_bar_widget.dart';
-import 'package:pankaj_charitable_trust/Widgets/Containers/container.dart';
 
-import '../../Widgets/AppBar/app_bar.dart';
-import '../../Widgets/Buttons/app_button.dart';
+import 'package:pankaj_charitable_trust/screens/Trustees/trustee_details_screen.dart';
+
 import '../../Widgets/Text Form Fields/password_widget.dart';
+import '../../database/models/trusties_model.dart';
+
+int? trusteeIndex;
+TrsutiesModel? trustee;
 
 class TrusteesListScreen extends StatelessWidget {
   const TrusteesListScreen({super.key});
@@ -24,6 +26,7 @@ class TrusteesListScreen extends StatelessWidget {
         valueListenable: trustiesListNotifier,
         builder: (context, value, child) {
           final data = value;
+
           return Stack(
             children: [
               Container(
@@ -78,27 +81,43 @@ class TrusteesListScreen extends StatelessWidget {
                         ),
                       ),
                       Flexible(
-                        child: ListView.separated(
-                            physics: BouncingScrollPhysics(),
-                            itemBuilder: (context, index) {
-                              final data = value[index];
-                              return ListTile(
-                                title: Text(data.name),
-                                subtitle: Text(data.address),
-                                trailing: Text(
-                                  data.number,
-                                  style: TextStyle(color: Colors.black38),
-                                ),
-                              );
-                            },
-                            separatorBuilder: (context, index) {
-                              return Divider(
-                                height: 5,
-                                thickness: 1,
-                              );
-                            },
-                            itemCount: data.length),
-                      )
+                          child: data.isNotEmpty
+                              ? ListView.separated(
+                                  physics: BouncingScrollPhysics(),
+                                  itemBuilder: (context, index) {
+                                    trustee = value[index];
+                                    return ListTile(
+                                      title: Text(trustee!.name),
+                                      subtitle: Text(trustee!.address),
+                                      trailing: Text(
+                                        trustee!.number,
+                                        style: TextStyle(color: Colors.black38),
+                                      ),
+                                      onTap: () {
+                                        trusteeIndex = index;
+                                        if (trustee!.name.isNotEmpty) {
+                                          getTrustee(trusteeIndex!);
+                                          Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                              builder: (context) {
+                                                return TrusteeDetailsScreen();
+                                              },
+                                            ),
+                                          );
+                                        }
+                                      },
+                                    );
+                                  },
+                                  separatorBuilder: (context, index) {
+                                    return Divider(
+                                      height: 5,
+                                      thickness: 1,
+                                    );
+                                  },
+                                  itemCount: data.length)
+                              : const Center(
+                                  child: Text("No Trustees"),
+                                ))
                     ],
                   )),
               Padding(

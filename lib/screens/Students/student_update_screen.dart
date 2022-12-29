@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hive_flutter/adapters.dart';
+
 import 'package:pankaj_charitable_trust/constants/dimensions.dart';
 import 'package:pankaj_charitable_trust/database/functions/db_helper.dart';
 import 'package:pankaj_charitable_trust/database/models/student_model.dart';
@@ -8,6 +8,7 @@ import 'package:pankaj_charitable_trust/Widgets/Text%20Form%20Fields/address_tex
 import 'package:pankaj_charitable_trust/Widgets/Text%20Form%20Fields/number_text_widget.dart';
 import 'package:pankaj_charitable_trust/Widgets/Text%20Form%20Fields/text_form_widget.dart';
 import 'package:pankaj_charitable_trust/Widgets/Buttons/app_button.dart';
+import 'package:pankaj_charitable_trust/screens/Students/students_list_screen.dart';
 
 import 'package:pankaj_charitable_trust/widgets/Drop%20Downs/college_drop_down.dart';
 import 'package:pankaj_charitable_trust/widgets/Drop%20Downs/course_drop_down_button.dart';
@@ -15,16 +16,21 @@ import 'package:pankaj_charitable_trust/widgets/Drop%20Downs/school_drop_down.da
 
 import 'package:pankaj_charitable_trust/widgets/Drop%20Downs/year_drop_down_botton.dart';
 
-class StudentUpdateScreen extends StatelessWidget {
-  int? dataIndex;
+class StudentUpdateScreen extends StatefulWidget {
+  int? studentDataIndex;
 
-  StudentUpdateScreen({super.key, this.dataIndex});
+  StudentUpdateScreen({super.key, this.studentDataIndex});
 
+  @override
+  State<StudentUpdateScreen> createState() => _StudentUpdateScreenState();
+}
+
+class _StudentUpdateScreenState extends State<StudentUpdateScreen> {
   checkSave() {}
 
   @override
   Widget build(BuildContext context) {
-    getStudent(dataIndex!);
+    getStudent(widget.studentDataIndex!);
     return Scaffold(
         appBar: AppBar(
           title: Text('Add Student'),
@@ -33,7 +39,12 @@ class StudentUpdateScreen extends StatelessWidget {
         body: ValueListenableBuilder(
           valueListenable: studentListNotifier,
           builder: (context, value, child) {
-            final studentData = value[dataIndex!];
+            final studentData = value[widget.studentDataIndex!];
+
+            schoolName = studentData.school;
+            collegName = studentData.college;
+            courseName = studentData.course;
+            year = studentData.year;
 
             TextEditingController nameController =
                 TextEditingController(text: studentData.name);
@@ -216,24 +227,37 @@ class StudentUpdateScreen extends StatelessWidget {
                                     final sNumber = numberController.text;
                                     final sAddress = addressController.text;
 
+                                    final _student = StudentModel(
+                                      name: sName,
+                                      email: sEmail,
+                                      number: sNumber,
+                                      address: sAddress,
+                                      school: schoolName,
+                                      college: collegName,
+                                      course: courseName,
+                                      year: year,
+                                    );
+
                                     if (formKey.currentState!.validate()) {
                                       formKey.currentState!.save();
 
-                                      final _student = StudentModel(
-                                          name: sName,
-                                          email: sEmail,
-                                          number: sNumber,
-                                          address: sAddress,
-                                          school: schoolName,
-                                          college: collegName,
-                                          course: courseName,
-                                          year: year);
-
                                       await updateStudent(
-                                          _student, studentData.id!);
+                                          _student, widget.studentDataIndex!);
 
                                       Navigator.of(context).pop();
-                                    } else {}
+                                    } else {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        const SnackBar(
+                                          margin: EdgeInsets.all(10),
+                                          backgroundColor: Colors.red,
+                                          duration: Duration(seconds: 1),
+                                          behavior: SnackBarBehavior.floating,
+                                          content:
+                                              Text('Same user already exist'),
+                                        ),
+                                      );
+                                    }
                                   },
                                   child: AppButton(text: 'Update')))
                         ],

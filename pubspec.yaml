@@ -30,9 +30,14 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   cupertino_icons: ^1.0.2
+  dotted_border: ^2.0.0+3
   flutter:
     sdk: flutter
+  get: ^4.6.5
   hive_flutter: ^1.1.0
+  http: ^0.13.5
+  image_picker: ^0.8.6
+  intl: ^0.18.0
 
 dev_dependencies:
   build_runner: ^2.3.2

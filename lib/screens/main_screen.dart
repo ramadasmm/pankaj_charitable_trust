@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:pankaj_charitable_trust/screens/Dashboard/dashboard_screen.dart';
+import 'package:pankaj_charitable_trust/screens/Gallery/gallery_screen.dart';
 import 'package:pankaj_charitable_trust/screens/Profile/profile_screen.dart';
 import 'package:pankaj_charitable_trust/screens/Students/add_student_screen.dart';
 import 'package:pankaj_charitable_trust/screens/Students/students_list_screen.dart';
@@ -15,6 +16,7 @@ class MainScreen extends StatelessWidget {
     DashBoardScreen(),
     TrusteesListScreen(),
     StudentListScreen(),
+    GalleryScreen(),
     ProfileScreen()
   ];
 

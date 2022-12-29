@@ -6,37 +6,38 @@ import 'package:pankaj_charitable_trust/Widgets/Containers/container.dart';
 import 'package:pankaj_charitable_trust/database/functions/db_helper.dart';
 import 'package:pankaj_charitable_trust/screens/Students/students_list_screen.dart';
 import 'package:pankaj_charitable_trust/screens/Students/student_update_screen.dart';
+import 'package:pankaj_charitable_trust/screens/Trustees/trustee_update_screen.dart';
+import 'package:pankaj_charitable_trust/screens/Trustees/trustees_list_screen.dart';
 
-int? studentId;
+int? trusteeId;
 
-class StudentDetailsScreen extends StatefulWidget {
-  StudentDetailsScreen({
+class TrusteeDetailsScreen extends StatefulWidget {
+  TrusteeDetailsScreen({
     super.key,
   });
 
   @override
-  State<StudentDetailsScreen> createState() => _StudentDetailsScreenState();
+  State<TrusteeDetailsScreen> createState() => _TrusteeDetailsScreenState();
 }
 
-class _StudentDetailsScreenState extends State<StudentDetailsScreen> {
-  bool studentDeleted = false;
+class _TrusteeDetailsScreenState extends State<TrusteeDetailsScreen> {
+  bool trusteeDataDeleted = false;
   @override
   Widget build(BuildContext context) {
-    getStudent(dataIndex!);
-
+    getTrustee(trusteeIndex!);
     return Scaffold(
         appBar: PreferredSize(
             preferredSize: Size.fromHeight(60),
-            child: AppBarWidget2(title: 'StudentName')),
-        body: studentDeleted == false
+            child: AppBarWidget2(title: 'TrusteeDetails')),
+        body: trusteeDataDeleted == false
             ? SingleChildScrollView(
                 child: ValueListenableBuilder(
-                  valueListenable: studentListNotifier,
+                  valueListenable: trustiesListNotifier,
                   builder: (context, value, child) {
                     final data = value;
-                    final studentData = value[dataIndex!];
+                    final trusteeData = value[trusteeIndex!];
 
-                    studentId = studentData.id;
+                    trusteeId = trusteeData.id;
 
                     return data.isNotEmpty
                         ? Container(
@@ -71,33 +72,21 @@ class _StudentDetailsScreenState extends State<StudentDetailsScreen> {
                                           //color: Colors.amber,
                                           child: Column(
                                             children: [
-                                              StudentDetailsWidget(
+                                              TrusteeDetailsWidget(
                                                   heading: 'Name',
-                                                  content: studentData.name),
+                                                  content: trusteeData.name),
                                               kHeight20,
-                                              StudentDetailsWidget(
+                                              TrusteeDetailsWidget(
                                                   heading: 'Email',
-                                                  content: studentData.email),
+                                                  content: trusteeData.email),
                                               kHeight20,
-                                              StudentDetailsWidget(
+                                              TrusteeDetailsWidget(
                                                   heading: 'Address',
-                                                  content: studentData.address),
+                                                  content: trusteeData.address),
                                               kHeight20,
-                                              StudentDetailsWidget(
-                                                  heading: 'School',
-                                                  content: studentData.school),
-                                              kHeight20,
-                                              StudentDetailsWidget(
-                                                  heading: 'Course',
-                                                  content: studentData.course),
-                                              kHeight20,
-                                              StudentDetailsWidget(
-                                                  heading: 'College',
-                                                  content: studentData.college),
-                                              kHeight20,
-                                              StudentDetailsWidget(
-                                                  heading: 'Year',
-                                                  content: studentData.year),
+                                              TrusteeDetailsWidget(
+                                                  heading: 'Phone',
+                                                  content: trusteeData.number),
                                               kHeight20,
                                               Row(
                                                 mainAxisAlignment:
@@ -111,10 +100,11 @@ class _StudentDetailsScreenState extends State<StudentDetailsScreen> {
                                                                   Colors.red)),
                                                       onPressed: () {
                                                         setState(() {
-                                                          deleteStudent(
-                                                              dataIndex!);
+                                                          deleteTrustee(
+                                                              trusteeIndex!);
 
-                                                          studentDeleted = true;
+                                                          trusteeDataDeleted =
+                                                              true;
                                                         });
                                                       },
                                                       child:
@@ -129,9 +119,9 @@ class _StudentDetailsScreenState extends State<StudentDetailsScreen> {
                                                         Navigator.push(context,
                                                             MaterialPageRoute(
                                                           builder: (context) {
-                                                            return StudentUpdateScreen(
-                                                              studentDataIndex:
-                                                                  dataIndex,
+                                                            return TrusteeUpdateScreen(
+                                                              trusteeIndex:
+                                                                  trusteeIndex,
                                                             );
                                                           },
                                                         ));
@@ -147,7 +137,7 @@ class _StudentDetailsScreenState extends State<StudentDetailsScreen> {
                               ],
                             ),
                           )
-                        : Text('Student Deleted');
+                        : Text('Trustee Deleted');
                   },
                 ),
               )
@@ -157,10 +147,10 @@ class _StudentDetailsScreenState extends State<StudentDetailsScreen> {
   }
 }
 
-class StudentDetailsWidget extends StatelessWidget {
+class TrusteeDetailsWidget extends StatelessWidget {
   final String heading;
   final String content;
-  const StudentDetailsWidget(
+  const TrusteeDetailsWidget(
       {Key? key, required this.content, required this.heading})
       : super(key: key);
 

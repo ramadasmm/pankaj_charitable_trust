@@ -6,6 +6,7 @@ late String schoolName;
 
 class SchoolDropDownButton extends StatefulWidget {
   String? dropdownValue;
+
   SchoolDropDownButton({super.key, this.dropdownValue});
 
   @override
@@ -72,10 +73,12 @@ class _schoolDropDownButtonState extends State<SchoolDropDownButton> {
       // ),
       onChanged: (String? value) {
         setState(() {
-          dropdownValue = value!;
+          widget.dropdownValue = value!;
         });
-        schoolName = dropdownValue!;
+
+        schoolName = widget.dropdownValue!;
       },
+
       items: list.map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(
           value: value,

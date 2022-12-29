@@ -28,6 +28,7 @@ class BottomNavBar extends StatelessWidget {
             BottomNavigationBarItem(
                 icon: Icon(Icons.receipt_outlined), label: ""),
             BottomNavigationBarItem(icon: Icon(Icons.school), label: ""),
+            BottomNavigationBarItem(icon: Icon(Icons.image_search), label: ""),
             BottomNavigationBarItem(
                 icon: Icon(Icons.account_circle_outlined), label: ""),
           ],

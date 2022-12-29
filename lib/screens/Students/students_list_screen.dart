@@ -13,6 +13,7 @@ import 'package:pankaj_charitable_trust/Widgets/Text%20Form%20Fields/password_wi
 import 'add_student_screen.dart';
 
 int? dataIndex;
+StudentModel? student;
 
 class StudentListScreen extends StatelessWidget {
   const StudentListScreen({super.key});
@@ -87,13 +88,13 @@ class StudentListScreen extends StatelessWidget {
                             ? ListView.separated(
                                 physics: BouncingScrollPhysics(),
                                 itemBuilder: (context, index) {
-                                  final data = value[index];
+                                  final student = value[index];
 
                                   return ListTile(
                                     onTap: () {
                                       dataIndex = index;
 
-                                      if (data.id != null) {
+                                      if (student.name != null) {
                                         getStudent(dataIndex!);
 
                                         Navigator.of(context).push(
@@ -105,10 +106,10 @@ class StudentListScreen extends StatelessWidget {
                                         );
                                       }
                                     },
-                                    title: Text(data.name),
-                                    subtitle: Text(data.email),
+                                    title: Text(student.name),
+                                    subtitle: Text(student.email),
                                     trailing: Text(
-                                      'Year: ${data.year}',
+                                      'Year: ${student.year}',
                                       style: TextStyle(color: Colors.black38),
                                     ),
                                   );
