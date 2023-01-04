@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class SearchTextFormField extends StatefulWidget {
   String hintText;
-  TextEditingController controller;
+  TextEditingController? controller;
+  void Function(String)? onChanged;
 
   String? Function(String?)? validator;
 
   SearchTextFormField(
       {super.key,
+      this.onChanged,
       required this.hintText,
-      required this.controller,
+      this.controller,
       required this.validator});
 
   @override
@@ -20,6 +23,7 @@ class _SearchTextFormFieldState extends State<SearchTextFormField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onChanged: widget.onChanged,
       cursorWidth: 1,
       cursorHeight: 20,
       cursorColor: Colors.black45,

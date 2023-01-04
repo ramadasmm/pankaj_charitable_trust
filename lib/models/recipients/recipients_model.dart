@@ -86,7 +86,7 @@ class Datum {
         active: json["Active"],
       );
 
-  Map<String, dynamic> toJson() => {
+  Map<dynamic, dynamic> toJson() => {
         "Id": id,
         "StartYear": startYear,
         "Name": name,

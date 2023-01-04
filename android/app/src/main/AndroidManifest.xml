@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.pankaj_charitable_trust">
+    <uses-permission android:name="android.permission.INTERNET"/>
     
    <application
         android:label="pankaj_charitable_trust"
