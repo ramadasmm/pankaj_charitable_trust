@@ -22,12 +22,10 @@ class _StudentDetailsScreenState extends State<StudentDetailsScreen> {
   bool studentDeleted = false;
   @override
   Widget build(BuildContext context) {
-    getStudent(dataIndex!);
-
     return Scaffold(
         appBar: PreferredSize(
             preferredSize: Size.fromHeight(60),
-            child: AppBarWidget2(title: 'StudentName')),
+            child: AppBarWidget2(title: 'Recipient')),
         body: studentDeleted == false
             ? SingleChildScrollView(
                 child: ValueListenableBuilder(
@@ -51,7 +49,7 @@ class _StudentDetailsScreenState extends State<StudentDetailsScreen> {
                                         padding: EdgeInsets.only(
                                             left: 20, top: 20, bottom: 5),
                                         child: Text(
-                                          'Profile Details',
+                                          'Recipient Details',
                                           style: TextStyle(
                                               color: Colors.deepPurple,
                                               fontSize: 16,
@@ -72,32 +70,55 @@ class _StudentDetailsScreenState extends State<StudentDetailsScreen> {
                                           child: Column(
                                             children: [
                                               StudentDetailsWidget(
+                                                  heading: 'ID',
+                                                  content: studentData.id
+                                                      .toString()),
+                                              kHeight20,
+                                              StudentDetailsWidget(
                                                   heading: 'Name',
-                                                  content: studentData.name),
+                                                  content: studentData.name
+                                                      .toString()),
                                               kHeight20,
                                               StudentDetailsWidget(
-                                                  heading: 'Email',
-                                                  content: studentData.email),
-                                              kHeight20,
-                                              StudentDetailsWidget(
-                                                  heading: 'Address',
-                                                  content: studentData.address),
+                                                  heading: 'SchoolID',
+                                                  content: studentData.schooId),
                                               kHeight20,
                                               StudentDetailsWidget(
                                                   heading: 'School',
                                                   content: studentData.school),
                                               kHeight20,
                                               StudentDetailsWidget(
+                                                  heading: 'Course ID',
+                                                  content:
+                                                      studentData.courseId),
+                                              kHeight20,
+                                              StudentDetailsWidget(
                                                   heading: 'Course',
                                                   content: studentData.course),
+                                              kHeight20,
+                                              StudentDetailsWidget(
+                                                  heading: 'College ID',
+                                                  content:
+                                                      studentData.collegeId),
                                               kHeight20,
                                               StudentDetailsWidget(
                                                   heading: 'College',
                                                   content: studentData.college),
                                               kHeight20,
                                               StudentDetailsWidget(
-                                                  heading: 'Year',
-                                                  content: studentData.year),
+                                                  heading: 'Start Year',
+                                                  content:
+                                                      studentData.startYear),
+                                              kHeight20,
+                                              StudentDetailsWidget(
+                                                  heading: 'Duration',
+                                                  content:
+                                                      studentData.duration),
+                                              kHeight20,
+                                              StudentDetailsWidget(
+                                                  heading: 'Remarks',
+                                                  content: studentData.remarks
+                                                      .toString()),
                                               kHeight20,
                                               Row(
                                                 mainAxisAlignment:

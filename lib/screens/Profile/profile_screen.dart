@@ -1,11 +1,12 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:pankaj_charitable_trust/api/base_client.dart';
+
 import 'package:pankaj_charitable_trust/models/recipients/recipients_model.dart';
+import 'package:pankaj_charitable_trust/screens/Students/add_student_screen.dart';
 import 'package:pankaj_charitable_trust/widgets/Text%20Form%20Fields/password_widget.dart';
-
 import '../../Widgets/AppBar/app_bar_widget.dart';
-
-import '../Trustees/add_trustee_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -42,7 +43,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-  
     return Scaffold(
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(60),
@@ -54,7 +54,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
               return Stack(
                 children: [
                   Container(
-                      margin: EdgeInsets.only(left: 10, right: 10, top: 10),
+                      margin:
+                          const EdgeInsets.only(left: 10, right: 10, top: 10),
                       width: double.infinity,
                       decoration: const BoxDecoration(
                         color: Colors.white,
@@ -82,8 +83,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             ),
                           ),
                           Padding(
-                            padding:
-                                EdgeInsets.only(left: 20, top: 5, bottom: 10),
+                            padding: const EdgeInsets.only(
+                                left: 20, top: 5, bottom: 10),
                             child: Text(
                               '${_foundRecip!.length} Recipients',
                               style: const TextStyle(
@@ -97,16 +98,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),
                           Flexible(
                               child: ListView.builder(
-                                  itemCount: _foundRecip!.length,
-                                  itemBuilder: (context, index) {
-                                    return ListTile(
-                                      title: Text(
-                                          _foundRecip![index].name.toString()),
-                                      subtitle: Text(_foundRecip![index]
-                                          .college
-                                          .toString()),
-                                    );
-                                  }))
+                            itemCount: _foundRecip!.length,
+                            itemBuilder: (context, index) {
+                              return ListTile(
+                                title:
+                                    Text(_foundRecip![index].name.toString()),
+                                subtitle: Text(
+                                    _foundRecip![index].college.toString()),
+                              );
+                            },
+                          ))
                         ],
                       )),
                   Padding(
@@ -117,7 +118,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         onTap: () {
                           Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) {
-                              return AddTrusteeScreen();
+                              return AddStudentScreen();
                             },
                           ));
                         },

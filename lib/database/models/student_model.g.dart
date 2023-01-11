@@ -19,38 +19,47 @@ class StudentModelAdapter extends TypeAdapter<StudentModel> {
     return StudentModel(
       id: fields[0] as int?,
       name: fields[1] as String,
-      email: fields[2] as String,
-      number: fields[3] as String,
-      address: fields[4] as String,
-      school: fields[5] as String,
-      college: fields[6] as String,
-      course: fields[7] as String,
-      year: fields[8] as String,
+      active: fields[11] as String,
+      collegeId: fields[5] as String,
+      courseId: fields[7] as String,
+      duration: fields[9] as String,
+      remarks: fields[10] as String?,
+      schooId: fields[3] as String,
+      school: fields[2] as String,
+      college: fields[4] as String,
+      course: fields[6] as String,
+      startYear: fields[8] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, StudentModel obj) {
     writer
-      ..writeByte(9)
+      ..writeByte(12)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
       ..write(obj.name)
       ..writeByte(2)
-      ..write(obj.email)
-      ..writeByte(3)
-      ..write(obj.number)
-      ..writeByte(4)
-      ..write(obj.address)
-      ..writeByte(5)
       ..write(obj.school)
-      ..writeByte(6)
+      ..writeByte(3)
+      ..write(obj.schooId)
+      ..writeByte(4)
       ..write(obj.college)
-      ..writeByte(7)
+      ..writeByte(5)
+      ..write(obj.collegeId)
+      ..writeByte(6)
       ..write(obj.course)
+      ..writeByte(7)
+      ..write(obj.courseId)
       ..writeByte(8)
-      ..write(obj.year);
+      ..write(obj.startYear)
+      ..writeByte(9)
+      ..write(obj.duration)
+      ..writeByte(10)
+      ..write(obj.remarks)
+      ..writeByte(11)
+      ..write(obj.active);
   }
 
   @override

@@ -32,7 +32,7 @@ Future<void> getAllStudents() async {
   studentListNotifier.notifyListeners();
 }
 
-Future<void> getStudent(int id) async {
+Future<void> getStudent(int? id) async {
   final studentDB = await Hive.openBox<StudentModel>('student_db');
 
   studentDB.get(id);
@@ -42,8 +42,6 @@ Future<void> deleteStudent(int id) async {
   final studentDB = await Hive.openBox<StudentModel>('student_db');
 
   await studentDB.deleteAt(id);
-  studentListNotifier.value.clear();
-  studentListNotifier.notifyListeners();
 
   getAllStudents();
 }
@@ -52,7 +50,6 @@ Future<void> updateStudent(StudentModel value, int id) async {
   final studentDB = await Hive.openBox<StudentModel>('student_db');
 
   await studentDB.putAt(id, value);
-
   getAllStudents();
 }
 

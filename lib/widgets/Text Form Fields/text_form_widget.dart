@@ -4,16 +4,19 @@ class TextFormWidget extends StatelessWidget {
   String hintText;
   TextEditingController controller;
   String? Function(String?)? validator;
+  TextInputType? keyboardType;
 
   TextFormWidget(
       {super.key,
       required this.hintText,
+      this.keyboardType,
       required this.controller,
       required this.validator});
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      keyboardType: keyboardType,
       controller: controller,
       validator: validator,
       decoration: InputDecoration(

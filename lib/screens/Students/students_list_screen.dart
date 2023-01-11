@@ -93,10 +93,7 @@ class StudentListScreen extends StatelessWidget {
                                   return ListTile(
                                     onTap: () {
                                       dataIndex = index;
-
                                       if (student.name != null) {
-                                        getStudent(dataIndex!);
-
                                         Navigator.of(context).push(
                                           MaterialPageRoute(
                                             builder: (context) {
@@ -107,9 +104,9 @@ class StudentListScreen extends StatelessWidget {
                                       }
                                     },
                                     title: Text(student.name),
-                                    subtitle: Text(student.email),
+                                    subtitle: Text(student.course),
                                     trailing: Text(
-                                      'Year: ${student.year}',
+                                      'Year: ${student.startYear}',
                                       style: TextStyle(color: Colors.black38),
                                     ),
                                   );

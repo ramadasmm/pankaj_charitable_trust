@@ -7,29 +7,39 @@ class StudentModel extends HiveObject {
   int? id;
   @HiveField(1)
   String name;
+
   @HiveField(2)
-  String email;
-  @HiveField(3)
-  String number;
-  @HiveField(4)
-  String address;
-  @HiveField(5)
   String school;
-  @HiveField(6)
+  @HiveField(3)
+  String schooId;
+  @HiveField(4)
   String college;
-  @HiveField(7)
+  @HiveField(5)
+  String collegeId;
+  @HiveField(6)
   String course;
+  @HiveField(7)
+  String courseId;
   @HiveField(8)
-  String year;
+  String startYear;
+  @HiveField(9)
+  String duration;
+  @HiveField(10)
+  String? remarks;
+  @HiveField(11)
+  String active;
 
   StudentModel(
       {this.id,
       required this.name,
-      required this.email,
-      required this.number,
-      required this.address,
+      required this.active,
+      required this.collegeId,
+      required this.courseId,
+      required this.duration,
+      this.remarks,
+      required this.schooId,
       required this.school,
       required this.college,
       required this.course,
-      required this.year});
+      required this.startYear});
 }

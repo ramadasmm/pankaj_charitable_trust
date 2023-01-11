@@ -6,10 +6,6 @@ import 'package:pankaj_charitable_trust/Widgets/Text%20Form%20Fields/text_form_w
 import 'package:pankaj_charitable_trust/Widgets/Buttons/app_button.dart';
 import 'package:pankaj_charitable_trust/database/functions/db_helper.dart';
 import 'package:pankaj_charitable_trust/database/models/trusties_model.dart';
-import 'package:pankaj_charitable_trust/screens/Trustees/trustee_details_screen.dart';
-import 'package:pankaj_charitable_trust/screens/Trustees/trustees_list_screen.dart';
-
-import '../../Widgets/AppBar/app_bar.dart';
 
 class AddTrusteeScreen extends StatelessWidget {
   AddTrusteeScreen({super.key});
@@ -149,6 +145,7 @@ class AddTrusteeScreen extends StatelessWidget {
                                   formKey.currentState!.save();
 
                                   addTrusties(_tustie);
+
                                   Navigator.pop(context);
                                 } else {
                                   ScaffoldMessenger.of(context).showSnackBar(

@@ -1,28 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:pankaj_charitable_trust/api/base_client.dart';
 import 'package:pankaj_charitable_trust/constants/dimensions.dart';
 import 'package:pankaj_charitable_trust/database/functions/db_helper.dart';
 import 'package:pankaj_charitable_trust/database/models/student_model.dart';
-
-import 'package:pankaj_charitable_trust/Widgets/Drop%20Downs/school_drop_down.dart';
-import 'package:pankaj_charitable_trust/Widgets/Text%20Form%20Fields/address_text_widget.dart';
-import 'package:pankaj_charitable_trust/Widgets/Text%20Form%20Fields/number_text_widget.dart';
-import 'package:pankaj_charitable_trust/Widgets/Text%20Form%20Fields/text_form_widget.dart';
 import 'package:pankaj_charitable_trust/Widgets/Buttons/app_button.dart';
-import 'package:pankaj_charitable_trust/screens/Students/students_list_screen.dart';
+import 'package:pankaj_charitable_trust/models/recipients/recipients_model.dart';
 
 import 'package:pankaj_charitable_trust/widgets/Drop%20Downs/college_drop_down.dart';
 import 'package:pankaj_charitable_trust/widgets/Drop%20Downs/course_drop_down_button.dart';
 
 import 'package:pankaj_charitable_trust/widgets/Drop%20Downs/year_drop_down_botton.dart';
 
+import '../../Widgets/Drop Downs/school_drop_down.dart';
+import '../../widgets/Text Form Fields/text_form_widget.dart';
+
 class AddStudentScreen extends StatelessWidget {
   AddStudentScreen({
     super.key,
   });
   TextEditingController nameController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController numberController = TextEditingController();
-  TextEditingController addressController = TextEditingController();
+  TextEditingController remarksController = TextEditingController();
+  TextEditingController startYearController = TextEditingController();
+  TextEditingController schoolIdControlller = TextEditingController();
+  TextEditingController collegeIdController = TextEditingController();
+
+  TextEditingController courseIdController = TextEditingController();
+  TextEditingController activeController = TextEditingController();
+  TextEditingController durationController = TextEditingController();
+
   final formKey = GlobalKey<FormState>();
   checkSave() {}
 
@@ -82,70 +87,25 @@ class AddStudentScreen extends StatelessWidget {
                               return 'Please enter student Name';
                             }
                           }),
-                      kHeight20,
+                      kHeight10,
                       const Padding(
                         padding: EdgeInsets.only(left: 5),
                         child: Text(
-                          'Email:',
+                          'School ID:',
                           style: TextStyle(fontSize: 16),
                         ),
                       ),
                       kHeight10,
                       TextFormWidget(
-                        hintText: 'Enter  Email',
-                        controller: emailController,
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return 'Please Enter your Email';
-                          } else if (!RegExp(
-                                  r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                              .hasMatch(value)) {
-                            return 'Please Enter valid Email';
-                          }
-                        },
-                      ),
-                      kHeight20,
-                      const Padding(
-                        padding: EdgeInsets.only(left: 5),
-                        child: Text(
-                          'Phone:',
-                          style: TextStyle(fontSize: 16),
-                        ),
-                      ),
-                      kHeight10,
-                      NumberTextWidget(
-                          hintText: 'Enter Number',
-                          controller: numberController,
+                          keyboardType: TextInputType.number,
+                          hintText: 'Enter school id',
+                          controller: schoolIdControlller,
                           validator: (value) {
                             if (value!.isEmpty) {
-                              return 'Please Enter your Number';
-                            } else if (!RegExp(r'(^(?:[+0]9)?[0-9]{10,12}$)')
-                                .hasMatch(value)) {
-                              return 'Enter valid number';
+                              return 'Please enter school id';
                             }
                           }),
-                      kHeight20,
-                      const Padding(
-                        padding: EdgeInsets.only(left: 5),
-                        child: Text(
-                          'Address:',
-                          style: TextStyle(fontSize: 16),
-                        ),
-                      ),
                       kHeight10,
-                      AddressTextField(
-                        hintText: 'Enter Address',
-                        controller: addressController,
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return 'Please Enter Address';
-                          } else if (!RegExp(r'(^[#.0-9a-zA-Z\s,-]+$)')
-                              .hasMatch(value)) {
-                            return 'Enter correct address';
-                          }
-                        },
-                      ),
-                      kHeight20,
                       const Padding(
                         padding: EdgeInsets.only(left: 5),
                         child: Text(
@@ -157,7 +117,25 @@ class AddStudentScreen extends StatelessWidget {
                       Padding(
                           padding: EdgeInsets.only(left: 0),
                           child: SchoolDropDownButton()),
-                      kHeight20,
+                      kHeight10,
+                      const Padding(
+                        padding: EdgeInsets.only(left: 5),
+                        child: Text(
+                          'collegeId:',
+                          style: TextStyle(fontSize: 16),
+                        ),
+                      ),
+                      kHeight10,
+                      TextFormWidget(
+                          keyboardType: TextInputType.number,
+                          hintText: 'Enter college id',
+                          controller: collegeIdController,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Please enter college id';
+                            }
+                          }),
+                      kHeight10,
                       const Padding(
                         padding: EdgeInsets.only(left: 5),
                         child: Text(
@@ -169,7 +147,25 @@ class AddStudentScreen extends StatelessWidget {
                       Padding(
                           padding: EdgeInsets.only(left: 0),
                           child: CollegeDropDownButton()),
-                      kHeight20,
+                      kHeight10,
+                      const Padding(
+                        padding: EdgeInsets.only(left: 5),
+                        child: Text(
+                          'CourseId:',
+                          style: TextStyle(fontSize: 16),
+                        ),
+                      ),
+                      kHeight10,
+                      TextFormWidget(
+                          keyboardType: TextInputType.number,
+                          hintText: 'Enter course id',
+                          controller: courseIdController,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Please enter courseId';
+                            }
+                          }),
+                      kHeight10,
                       const Padding(
                         padding: EdgeInsets.only(left: 5),
                         child: Text(
@@ -185,7 +181,7 @@ class AddStudentScreen extends StatelessWidget {
                       const Padding(
                         padding: EdgeInsets.only(left: 5),
                         child: Text(
-                          'Year:',
+                          'Start Year:',
                           style: TextStyle(fontSize: 16),
                         ),
                       ),
@@ -193,34 +189,92 @@ class AddStudentScreen extends StatelessWidget {
                       Padding(
                           padding: EdgeInsets.only(left: 0),
                           child: YearDropDownButton()),
+                      kHeight10,
+                      const Padding(
+                        padding: EdgeInsets.only(left: 5),
+                        child: Text(
+                          'Active:',
+                          style: TextStyle(fontSize: 16),
+                        ),
+                      ),
+                      kHeight10,
+                      TextFormWidget(
+                          keyboardType: TextInputType.number,
+                          hintText: 'Active',
+                          controller: activeController,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return '*Required';
+                            }
+                          }),
+                      kHeight10,
+                      const Padding(
+                        padding: EdgeInsets.only(left: 5),
+                        child: Text(
+                          'Duration:',
+                          style: TextStyle(fontSize: 16),
+                        ),
+                      ),
+                      kHeight10,
+                      TextFormWidget(
+                          keyboardType: TextInputType.number,
+                          hintText: 'Duration',
+                          controller: durationController,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return '*Required';
+                            }
+                          }),
+                      kHeight10,
+                      const Padding(
+                        padding: EdgeInsets.only(left: 5),
+                        child: Text(
+                          'Remarks:',
+                          style: TextStyle(fontSize: 16),
+                        ),
+                      ),
+                      kHeight10,
+                      TextFormWidget(
+                          hintText: 'Remarks',
+                          controller: remarksController,
+                          validator: (value) {}),
                       kHeight30,
                       Center(
                           child: InkWell(
                               onTap: () {
-                                final sName = nameController.text;
-                                final sEmail = emailController.text;
-                                final sNumber = numberController.text;
-                                final sAddress = addressController.text;
-
                                 if (formKey.currentState!.validate()) {
                                   formKey.currentState!.save();
+                                  print(remarksController.text);
 
                                   final _student = StudentModel(
-                                      name: sName,
-                                      email: sEmail,
-                                      number: sNumber,
-                                      address: sAddress,
+                                      name: nameController.text,
+                                      startYear: year,
                                       school: schoolName,
+                                      schooId: schoolIdControlller.text,
                                       college: collegName,
+                                      collegeId: collegeIdController.text,
                                       course: courseName,
-                                      year: year);
+                                      courseId: '1',
+                                      remarks: remarksController.text,
+                                      active: activeController.text,
+                                      duration: durationController.text);
+
+                                  // var recipient = Datum(
+                                  //   id: 222,
+                                  //   name: nameController.text,
+                                  //   // school: schoolName,
+                                  //   // college: collegName,
+                                  //   // startYear: 5,
+                                  // );
+
+                                  // BaseClient().postRecipient(recipient);
 
                                   addStudent(_student);
 
                                   Navigator.of(context).pop();
                                 } else {}
                               },
-                              child: AppButton(text: 'Save')))
+                              child: const AppButton(text: 'Save')))
                     ],
                   ),
                 ),

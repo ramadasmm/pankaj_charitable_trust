@@ -41,19 +41,28 @@ class _StudentUpdateScreenState extends State<StudentUpdateScreen> {
           builder: (context, value, child) {
             final studentData = value[widget.studentDataIndex!];
 
+            final updateStudentId = studentData.id;
+
             schoolName = studentData.school;
             collegName = studentData.college;
             courseName = studentData.course;
-            year = studentData.year;
+            year = studentData.startYear;
 
             TextEditingController nameController =
                 TextEditingController(text: studentData.name);
-            TextEditingController emailController =
-                TextEditingController(text: studentData.email);
-            TextEditingController numberController =
-                TextEditingController(text: studentData.number);
-            TextEditingController addressController =
-                TextEditingController(text: studentData.address);
+            TextEditingController activeController =
+                TextEditingController(text: studentData.active);
+            TextEditingController schoolIdControlller =
+                TextEditingController(text: studentData.schooId);
+            TextEditingController collegeIdController =
+                TextEditingController(text: studentData.collegeId);
+            TextEditingController courseIdController =
+                TextEditingController(text: studentData.courseId);
+            TextEditingController durationController =
+                TextEditingController(text: studentData.duration);
+            TextEditingController remarksController =
+                TextEditingController(text: studentData.remarks);
+
             final formKey = GlobalKey<FormState>();
             return SingleChildScrollView(
               child: Column(
@@ -102,66 +111,19 @@ class _StudentUpdateScreenState extends State<StudentUpdateScreen> {
                           const Padding(
                             padding: EdgeInsets.only(left: 5),
                             child: Text(
-                              'Email:',
+                              'SchoolId:',
                               style: TextStyle(fontSize: 16),
                             ),
                           ),
                           kHeight10,
                           TextFormWidget(
-                            hintText: 'Enter  Email',
-                            controller: emailController,
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return 'Please Enter your Email';
-                              } else if (!RegExp(
-                                      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                                  .hasMatch(value)) {
-                                return 'Please Enter valid Email';
-                              }
-                            },
-                          ),
-                          kHeight20,
-                          const Padding(
-                            padding: EdgeInsets.only(left: 5),
-                            child: Text(
-                              'Phone:',
-                              style: TextStyle(fontSize: 16),
-                            ),
-                          ),
-                          kHeight10,
-                          NumberTextWidget(
-                              hintText: 'Enter Number',
-                              controller: numberController,
+                              hintText: 'Enter Schoold',
+                              controller: schoolIdControlller,
                               validator: (value) {
                                 if (value!.isEmpty) {
-                                  return 'Please Enter your Number';
-                                } else if (!RegExp(
-                                        r'(^(?:[+0]9)?[0-9]{10,12}$)')
-                                    .hasMatch(value)) {
-                                  return 'Enter valid number';
+                                  return 'Please enter student Name';
                                 }
                               }),
-                          kHeight20,
-                          const Padding(
-                            padding: EdgeInsets.only(left: 5),
-                            child: Text(
-                              'Address:',
-                              style: TextStyle(fontSize: 16),
-                            ),
-                          ),
-                          kHeight10,
-                          AddressTextField(
-                            hintText: 'Enter Address',
-                            controller: addressController,
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return 'Please Enter Address';
-                              } else if (!RegExp(r'(^[#.0-9a-zA-Z\s,-]+$)')
-                                  .hasMatch(value)) {
-                                return 'Enter correct number';
-                              }
-                            },
-                          ),
                           kHeight20,
                           const Padding(
                             padding: EdgeInsets.only(left: 5),
@@ -180,6 +142,23 @@ class _StudentUpdateScreenState extends State<StudentUpdateScreen> {
                           const Padding(
                             padding: EdgeInsets.only(left: 5),
                             child: Text(
+                              'CollegeId:',
+                              style: TextStyle(fontSize: 16),
+                            ),
+                          ),
+                          kHeight10,
+                          TextFormWidget(
+                              hintText: 'Enter CollegeId',
+                              controller: collegeIdController,
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'Please enter collegId';
+                                }
+                              }),
+                          kHeight20,
+                          const Padding(
+                            padding: EdgeInsets.only(left: 5),
+                            child: Text(
                               'College:',
                               style: TextStyle(fontSize: 16),
                             ),
@@ -190,6 +169,23 @@ class _StudentUpdateScreenState extends State<StudentUpdateScreen> {
                               child: CollegeDropDownButton(
                                 dropdownValue: studentData.college,
                               )),
+                          kHeight20,
+                          const Padding(
+                            padding: EdgeInsets.only(left: 5),
+                            child: Text(
+                              'course Id:',
+                              style: TextStyle(fontSize: 16),
+                            ),
+                          ),
+                          kHeight10,
+                          TextFormWidget(
+                              hintText: 'Enter courseID',
+                              controller: courseIdController,
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'Please enter courseId';
+                                }
+                              }),
                           kHeight20,
                           const Padding(
                             padding: EdgeInsets.only(left: 5),
@@ -208,7 +204,7 @@ class _StudentUpdateScreenState extends State<StudentUpdateScreen> {
                           const Padding(
                             padding: EdgeInsets.only(left: 5),
                             child: Text(
-                              'Year:',
+                              'Start Year:',
                               style: TextStyle(fontSize: 16),
                             ),
                           ),
@@ -216,27 +212,54 @@ class _StudentUpdateScreenState extends State<StudentUpdateScreen> {
                           Padding(
                               padding: EdgeInsets.only(left: 0),
                               child: YearDropDownButton(
-                                dropdownValue: studentData.year,
+                                dropdownValue: studentData.startYear,
                               )),
+                          kHeight20,
+                          const Padding(
+                            padding: EdgeInsets.only(left: 5),
+                            child: Text(
+                              'Duration:',
+                              style: TextStyle(fontSize: 16),
+                            ),
+                          ),
+                          kHeight10,
+                          TextFormWidget(
+                              hintText: 'Enter Duration',
+                              controller: durationController,
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'Please enter Duration';
+                                }
+                              }),
+                          kHeight20,
+                          const Padding(
+                            padding: EdgeInsets.only(left: 5),
+                            child: Text(
+                              'Remarks:',
+                              style: TextStyle(fontSize: 16),
+                            ),
+                          ),
+                          kHeight10,
+                          TextFormWidget(
+                              hintText: 'Enter Remarks',
+                              controller: remarksController,
+                              validator: (value) {}),
                           kHeight30,
                           Center(
                               child: InkWell(
                                   onTap: () async {
-                                    final sName = nameController.text;
-                                    final sEmail = emailController.text;
-                                    final sNumber = numberController.text;
-                                    final sAddress = addressController.text;
-
                                     final _student = StudentModel(
-                                      name: sName,
-                                      email: sEmail,
-                                      number: sNumber,
-                                      address: sAddress,
-                                      school: schoolName,
-                                      college: collegName,
-                                      course: courseName,
-                                      year: year,
-                                    );
+                                        name: nameController.text,
+                                        active: activeController.text,
+                                        startYear: year,
+                                        school: schoolName,
+                                        schooId: schoolIdControlller.text,
+                                        college: collegName,
+                                        collegeId: collegeIdController.text,
+                                        course: courseName,
+                                        remarks: remarksController.text,
+                                        courseId: courseIdController.text,
+                                        duration: durationController.text);
 
                                     if (formKey.currentState!.validate()) {
                                       formKey.currentState!.save();
